@@ -8,9 +8,11 @@ API Keys are not given out, as this is only example code and thus does not have 
 
 ---
 ### **Installation Requirements:**
-This has only been tested to work on [python](https://www.python.org/downloads/) 3.10. Versions outside of those versions may not work.
+This has only been tested to work on [python](https://www.python.org/downloads/) 3.10. Versions outside those versions may not work.
 
 This uses the pip package [requests](https://pypi.org/project/requests/), and will not work without it. Installation guide can be found within the link.
+
+This also has only been tested on **Windows 10**. Linux likely will not work unmodified without directory structure changes.
 
 ---
 ## License:
