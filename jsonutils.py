@@ -8,7 +8,10 @@ from utils import getFromCurseforgeAPI
 def getPackName(jsonInput):
     jsonLoaded = json.loads(jsonInput)
     modpackName = jsonLoaded["name"]
-    modpackVersion = jsonLoaded["version"]
+    try:
+        modpackVersion = jsonLoaded["version"]
+    except KeyError:
+        modpackVersion = "0"
     return modpackName + "_" + modpackVersion
 
 
