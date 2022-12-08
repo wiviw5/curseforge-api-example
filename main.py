@@ -1,4 +1,4 @@
-from utils import initializeProgram, makeFolders, getTextFromFile
+from utils import initializeProgram, makeFolders, getTextFromFile, writeInstallInstructions
 from zipandtemputils import unzipAndReturnDirPath, getZipsInActiveFolder, copyOverriderAndCleanup
 from jsonutils import getMCVersion, getModloaderName, getPackName, downloadMods
 
@@ -18,6 +18,7 @@ def prepFilesForModpack(manifestPath):
     downloadMods(getTextFromFile(manifestPath), modDirectory)
     print(f"Copying Over overrides & cleaning up...")
     copyOverriderAndCleanup(minecraftDirectory)
+    writeInstallInstructions(packDirectory, mcVersion, modLoader)
     print("Complete!")
     exit()
 
