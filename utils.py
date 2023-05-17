@@ -47,5 +47,5 @@ def getTextFromFile(path):
     return f.read()
 
 
-def writeInstallInstructions(path, mcVersion, modLoader):
-    open(path + "README.txt", 'w').write(f"Instructions:\n1. Make an instance with:\nMinecraft Version: {mcVersion}\nMod Loader Version: {modLoader}\n2. Copy over the .minecraft folder in this folder to the .minecraft folder of the instance you just made.\n3. Launch instance.")
+def writeInstallInstructions(path, modpackName, mcVersion, modLoader):
+    open(path + "README.txt", 'w').write(f"Instructions for {modpackName}:\n1. Make an instance with:\nMinecraft Version: {mcVersion}\nMod Loader Version: {modLoader}\n2. Copy over the .minecraft folder in this folder to the .minecraft folder of the instance you just made.\n3. Launch instance.")

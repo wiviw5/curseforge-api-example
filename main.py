@@ -18,7 +18,7 @@ def prepFilesForModpack(manifestPath):
     downloadMods(getTextFromFile(manifestPath), modDirectory)
     print(f"Copying Over overrides & cleaning up...")
     copyOverriderAndCleanup(minecraftDirectory)
-    writeInstallInstructions(packDirectory, mcVersion, modLoader)
+    writeInstallInstructions(packDirectory, modpackName, mcVersion, modLoader)
     print("Complete!")
     exit()
 
