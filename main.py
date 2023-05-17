@@ -15,10 +15,12 @@ def prepFilesForModpack(manifestPath):
     print(f"Minecraft Version: {mcVersion}")
     modLoader = getModloaderName(getTextFromFile(manifestPath))
     print(f"Modloader Version: {modLoader}")
-    downloadMods(getTextFromFile(manifestPath), modDirectory)
+    # Now that we have all the info, we make a readme file, first step here.
+    writeInstallInstructions(packDirectory, modpackName, mcVersion, modLoader)
+    # Second step, downloading mods, and adding onto the readme file with the mod list as well.
+    downloadMods(getTextFromFile(manifestPath), modDirectory, packDirectory)
     print(f"Copying Over overrides & cleaning up...")
     copyOverriderAndCleanup(minecraftDirectory)
-    writeInstallInstructions(packDirectory, modpackName, mcVersion, modLoader)
     print("Complete!")
     exit()
 

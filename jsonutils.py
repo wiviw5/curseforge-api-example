@@ -27,18 +27,21 @@ def getModloaderName(jsonInput):
     return modloaderVersion
 
 
-def downloadMods(jsonInput, location):
+def downloadMods(jsonInput, location, path):
     jsonLoaded = json.loads(jsonInput)
     modsList = jsonLoaded["files"]
     downloadedMods = 1
     totalMods = len(modsList)
+    f = open(path + "README.txt", 'a')
     for file in modsList:
         projectID = file["projectID"]
         fileID = file["fileID"]
         url = f"https://api.curseforge.com/v1/mods/{projectID}/files/{fileID}"
         fileName = downloadFile(url, location, downloadedMods, totalMods)
         print(f"{downloadedMods}/{totalMods} | ✅ {fileName}")
+        f.write(f"\n{downloadedMods}/{totalMods} | {fileName}")
         downloadedMods += 1
+    f.close()
 
 
 def downloadFile(url, location, downloadedMods, totalMods):
