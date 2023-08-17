@@ -1,4 +1,4 @@
-from utils import initializeProgram, makeFolders, getTextFromFile, writeInstallInstructions
+from utils import initializeProgram, makeFolders, getTextFromFile, writeInstallInstructions, isInt
 from zipandtemputils import unzipAndReturnDirPath, getZipsInActiveFolder, copyOverriderAndCleanup
 from jsonutils import getMCVersion, getModloaderName, getPackName, downloadMods
 
@@ -36,18 +36,19 @@ if __name__ == "__main__":
         print("[Reload] - Reloads Files to choose from.")
         print("[Exit] - Exits the Program")
         inputFromUser = input("").lower()
-        match inputFromUser:
-            case "exit" | "e" | "quit" | "q" | "stop" | "s":
-                exit()
-            case "reload" | "r":
-                print("Reloading Selections")
-            case _:
-                try:
-                    inputFromUser = int(inputFromUser)
-                    print(f"Zip Selected: {zips[inputFromUser]}, preparing to unzip & download.")
-                    manifestPath = unzipAndReturnDirPath(zips[inputFromUser]) + "manifest.json"
-                    prepFilesForModpack(manifestPath)
-                except ValueError:
-                    print(f"Invalid Selection or an error happened. Please try again.")
-                except IndexError:
-                    print(f"Invalid Selection or an error happened. Please try again.")
+        if isInt(inputFromUser):
+            inputFromUser = int(inputFromUser)
+            if inputFromUser+1 > len(zips):
+                print("Invalid Selection")
+            else:
+                print(f"Zip Selected: {zips[inputFromUser]}, preparing to unzip & download.")
+                manifestPath = unzipAndReturnDirPath(zips[inputFromUser]) + "manifest.json"
+                prepFilesForModpack(manifestPath)
+        else:
+            match inputFromUser:
+                case "exit" | "e" | "quit" | "q" | "stop" | "s":
+                    exit()
+                case "reload" | "r":
+                    print("Reloading Selections")
+                case _:
+                    print("Invalid Selection")

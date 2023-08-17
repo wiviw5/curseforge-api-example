@@ -31,6 +31,11 @@ def getAPIKey():
 
 def getFromCurseforgeAPI(url):
     returned = requests.get(url, headers=curseforgeAPIHeader)
+    if returned.status_code == 403:
+        print(f"Status: {returned.status_code} Forbidden.")
+        print("This means the api key is likely invalid, please check your key at this point, or add a proper key.")
+        exit()
+
     return returned.text
 
 
@@ -51,3 +56,10 @@ def writeInstallInstructions(path, modpackName, mcVersion, modLoader):
     f = open(path + "README.txt", 'w')
     f.write(f"Instructions for {modpackName}:\n1. Make an instance with:\n- Minecraft Version: {mcVersion}\n- Mod Loader Version: {modLoader}\n2. Copy over the .minecraft folder in this folder to the .minecraft folder of the instance you just made.\n3. Launch instance.\n\nMod List:")
     f.close()
+
+def isInt(userinput: str) -> bool:
+    try:
+        int(userinput)
+    except ValueError:
+        return False
+    return True
