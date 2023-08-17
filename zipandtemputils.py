@@ -5,7 +5,7 @@ import tempfile
 
 
 def unzipAndReturnDirPath(zipName):
-    zipFilePath = os.getcwd() + "\\" + zipName
+    zipFilePath = os.getcwd() + os.sep + zipName
     tempDirPath = makeAndClearTemp()
     with zipfile.ZipFile(zipFilePath, 'r') as zip_ref:
         zip_ref.extractall(tempDirPath)
@@ -13,7 +13,7 @@ def unzipAndReturnDirPath(zipName):
 
 
 def makeAndClearTemp():
-    path = tempfile.gettempdir() + "\\curseforgeDownloader\\"
+    path = tempfile.gettempdir() + f"{os.sep}curseforgeDownloader{os.sep}"
     try:
         shutil.rmtree(path)
     except OSError as e:
@@ -22,10 +22,11 @@ def makeAndClearTemp():
     return path
 
 
-def copyOverriderAndCleanup(path):
-    source = tempfile.gettempdir() + "\\curseforgeDownloader\\overrides\\"
+def copyOverriderAndCleanup(path, packDirectory, zipFilePath):
+    source = tempfile.gettempdir() + f"{os.sep}curseforgeDownloader{os.sep}overrides{os.sep}"
     destination = path
     shutil.copytree(source, destination, dirs_exist_ok=True)
+    shutil.move(zipFilePath, packDirectory)  # We just move the zip file into the newly created folder to organize everything, and keep it clean.
     makeAndClearTemp()
 
 

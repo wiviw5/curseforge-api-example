@@ -16,7 +16,7 @@ def getHeader():
 
 
 def getAPIKey():
-    path = os.getcwd() + "\\apikey"
+    path = os.getcwd() + os.sep + "apikey"
     if not os.path.exists(path):
         open(path, "x")
     f = open(path, "r")
@@ -40,11 +40,11 @@ def getFromCurseforgeAPI(url):
 
 
 def makeFolders(name):
-    if not os.path.exists(os.getcwd() + "\\" + name):
-        os.mkdir(os.getcwd() + "\\" + name)
-        os.mkdir(os.getcwd() + "\\" + name + "\\.minecraft")
-        os.mkdir(os.getcwd() + "\\" + name + "\\.minecraft\\mods")
-    return os.getcwd() + "\\" + name + "\\"
+    if not os.path.exists(os.getcwd() + os.sep + name):
+        os.mkdir(os.getcwd() + os.sep + name)
+        os.mkdir(os.getcwd() + os.sep + name + os.sep + ".minecraft")
+        os.mkdir(os.getcwd() + os.sep + name + os.sep + f".minecraft{os.sep}mods")
+    return os.getcwd() + os.sep + name + os.sep
 
 
 def getTextFromFile(path):
@@ -56,6 +56,7 @@ def writeInstallInstructions(path, modpackName, mcVersion, modLoader):
     f = open(path + "README.txt", 'w')
     f.write(f"Instructions for {modpackName}:\n1. Make an instance with:\n- Minecraft Version: {mcVersion}\n- Mod Loader Version: {modLoader}\n2. Copy over the .minecraft folder in this folder to the .minecraft folder of the instance you just made.\n3. Launch instance.\n\nMod List:")
     f.close()
+
 
 def isInt(userinput: str) -> bool:
     try:

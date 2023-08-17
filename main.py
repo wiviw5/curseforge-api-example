@@ -1,3 +1,5 @@
+import os
+
 from utils import initializeProgram, makeFolders, getTextFromFile, writeInstallInstructions, isInt
 from zipandtemputils import unzipAndReturnDirPath, getZipsInActiveFolder, copyOverriderAndCleanup
 from jsonutils import getMCVersion, getModloaderName, getPackName, downloadMods
@@ -5,11 +7,11 @@ from jsonutils import getMCVersion, getModloaderName, getPackName, downloadMods
 initializeProgram()
 
 
-def prepFilesForModpack(manifestPath):
+def prepFilesForModpack(manifestPath, zipName):
     modpackName = getPackName(getTextFromFile(manifestPath))
     packDirectory = makeFolders(modpackName)
-    minecraftDirectory = packDirectory + ".minecraft\\"
-    modDirectory = packDirectory + ".minecraft\\mods\\"
+    minecraftDirectory = packDirectory + f".minecraft{os.sep}"
+    modDirectory = packDirectory + f".minecraft{os.sep}mods{os.sep}"
     print(f"Find output here: {packDirectory}")
     mcVersion = getMCVersion(getTextFromFile(manifestPath))
     print(f"Minecraft Version: {mcVersion}")
@@ -20,7 +22,7 @@ def prepFilesForModpack(manifestPath):
     # Second step, downloading mods, and adding onto the readme file with the mod list as well.
     downloadMods(getTextFromFile(manifestPath), modDirectory, packDirectory)
     print(f"Copying Over overrides & cleaning up...")
-    copyOverriderAndCleanup(minecraftDirectory)
+    copyOverriderAndCleanup(path=minecraftDirectory, packDirectory=packDirectory, zipFilePath=os.getcwd() + os.sep + zipName)
     print("Complete!")
     exit()
 
@@ -38,12 +40,12 @@ if __name__ == "__main__":
         inputFromUser = input("").lower()
         if isInt(inputFromUser):
             inputFromUser = int(inputFromUser)
-            if inputFromUser+1 > len(zips):
+            if inputFromUser + 1 > len(zips):
                 print("Invalid Selection")
             else:
                 print(f"Zip Selected: {zips[inputFromUser]}, preparing to unzip & download.")
                 manifestPath = unzipAndReturnDirPath(zips[inputFromUser]) + "manifest.json"
-                prepFilesForModpack(manifestPath)
+                prepFilesForModpack(manifestPath, zips[inputFromUser])
         else:
             match inputFromUser:
                 case "exit" | "e" | "quit" | "q" | "stop" | "s":
