@@ -16,7 +16,7 @@ This has only been tested to work on [python](https://www.python.org/downloads/)
 
 This uses the pip package [requests](https://pypi.org/project/requests/), and will not work without it. Installation guide can be found within the link.
 
-This should work on all operating systems, please report if it does not..
+This should work on all operating systems, please report if it does not.
 
 ---
 
