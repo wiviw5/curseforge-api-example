@@ -3,6 +3,8 @@ import zipfile
 import shutil
 import tempfile
 
+from utils import openFiles
+
 
 def unzipAndReturnDirPath(zipName):
     zipFilePath = os.getcwd() + os.sep + zipName
@@ -28,6 +30,7 @@ def copyOverriderAndCleanup(path, packDirectory, zipFilePath):
     shutil.copytree(source, destination, dirs_exist_ok=True)
     shutil.move(zipFilePath, packDirectory)  # We just move the zip file into the newly created folder to organize everything, and keep it clean.
     makeAndClearTemp()
+    openFiles(packDirectory)
 
 
 def getZipsInActiveFolder():

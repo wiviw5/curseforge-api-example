@@ -64,3 +64,12 @@ def isInt(userinput: str) -> bool:
     except ValueError:
         return False
     return True
+
+def openFiles(folder):
+    print(f"Opening folder for {folder}")
+    # Windows
+    if os.name == "nt":
+        os.startfile(os.path.normpath(folder))
+    # Linux
+    if os.name == "posix":
+        os.system('xdg-open "%s"' % folder)
