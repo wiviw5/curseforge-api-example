@@ -28,10 +28,11 @@ I will have instructions for both Windows and Linux with commands labeled as suc
 
 #### Step 1: Making a virtual environment
 
+Part 1:
 - On Windows: `Open command prompt within the folder containing main.py`
 - On Linux: `Open a terminal session within the folder containing main.py`
 
-
+Part 2:
 - On Windows: `$ python -m venv venv`
 - On Linux `$ python3 -m venv venv`
 
@@ -56,9 +57,10 @@ Once done, you should see at the very left of your terminal/command prompt: `(ve
 
 **If running from a new command prompt/terminal window:**
 
+Part 1:
 - Follow only step 2 again.
 
-
+Part 2:
 - On Windows: `$ python main.py`
 - On Linux `$ python3 main.py`
 
