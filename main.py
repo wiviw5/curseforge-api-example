@@ -1,4 +1,5 @@
 import os
+import sys
 
 from utils import initializeProgram, makeFolders, getTextFromFile, writeInstallInstructions, isInt
 from zipandtemputils import unzipAndReturnDirPath, getZipsInActiveFolder, copyOverriderAndCleanup
@@ -24,7 +25,7 @@ def prepFilesForModpack(manifestPath, zipName):
     print(f"Copying Over overrides & cleaning up...")
     copyOverriderAndCleanup(path=minecraftDirectory, packDirectory=packDirectory, zipFilePath=os.getcwd() + os.sep + zipName)
     print("Complete!")
-    exit()
+    sys.exit()
 
 
 if __name__ == "__main__":
@@ -49,7 +50,7 @@ if __name__ == "__main__":
         else:
             match inputFromUser:
                 case "exit" | "e" | "quit" | "q" | "stop" | "s":
-                    exit()
+                    sys.exit()
                 case "reload" | "r":
                     print("Reloading Selections")
                 case _:

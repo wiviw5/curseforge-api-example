@@ -6,6 +6,11 @@ import tempfile
 from utils import openFiles
 
 
+def getFileFromZip(zipPath: str, filename: str):
+    with zipfile.ZipFile(zipPath, 'r') as zip_ref:
+        return zip_ref.open(filename).read()
+
+
 def unzipAndReturnDirPath(zipName):
     zipFilePath = os.getcwd() + os.sep + zipName
     tempDirPath = makeAndClearTemp()

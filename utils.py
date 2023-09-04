@@ -1,4 +1,5 @@
 import os
+import sys
 
 import requests
 
@@ -24,7 +25,7 @@ def getAPIKey():
     if token == "":
         print(f"Please put a curseforge API Key in \"{path}\" then restart program.")
         print("Please note: If you'd like to apply for an API Key, see here: https://support.curseforge.com/en/support/solutions/articles/9000208346-about-the-curseforge-api-and-how-to-apply-for-a-key")
-        exit()
+        sys.exit()
     else:
         return token
 
@@ -34,8 +35,7 @@ def getFromCurseforgeAPI(url):
     if returned.status_code == 403:
         print(f"Status: {returned.status_code} Forbidden.")
         print("This means the api key is likely invalid, please check your key at this point, or add a proper key.")
-        exit()
-
+        sys.exit()
     return returned.text
 
 
