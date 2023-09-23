@@ -7,6 +7,7 @@ import os
 
 import requests
 
+from jsonutils import getMCVersion, getModloaderName
 from utils import initializeProgram, getFromCurseforgeAPI, openFiles
 from zipandtemputils import getFileFromZip
 
@@ -41,6 +42,18 @@ def compareMods(oldmani: str, newmani: str, downloadLocation: str):
     # Now we assemble two lists of all the projectID and fileID pairs.
     oldModList = oldjson["files"]
     newModList = newjson["files"]
+    oldMCVersion = getMCVersion(oldmani)
+    newMCVersion = getMCVersion(newmani)
+    if oldMCVersion != newMCVersion:
+        print(f"Minecraft Version update: {oldMCVersion} -> {newMCVersion}")
+    else:
+        print(f"Modloader version stays the same at: {oldMCVersion}")
+    oldModLoader = getModloaderName(oldmani)
+    newModLoader = getModloaderName(newmani)
+    if oldModLoader != newModLoader:
+        print(f"Modloader Version update: {oldModLoader} -> {newModLoader}")
+    else:
+        print(f"Modloader version stays the same at: {oldModLoader}")
     oldProjectIDList = []
     oldFileIDList = []
     for file in oldModList:
